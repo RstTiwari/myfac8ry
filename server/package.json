@@ -1,0 +1,33 @@
+{
+  "name": "myfac8ry_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch --progress --colors --config webpack.conf.js",
+    "dev": "NODE_ENV=development  node index.js",
+    "prod": "NODE_ENV=production node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cloudinary": "^1.35.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5",
+    "multer": "*",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^3.0.1"
+  },
+  "optionalDependencies": {
+    "bcrypt": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2"
+  }
+}
