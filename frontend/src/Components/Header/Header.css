@@ -1,0 +1,272 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+/* Navbar Container */
+.main-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #22b378;
+    align-items: center;
+    background-color: #ffffffff;
+    position:fixed;
+    border-bottom: solid 1px #22b378;
+    z-index: 1000000;
+    align-items:center;
+    /* margin-top: 5%; */
+}
+
+/* Logo Styles */
+.logo {
+    font-size: 1.9rem;
+    font-weight: bold;
+    color: "red";
+    margin: 1vw;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
+/* Navigation Links */
+.navlink {
+    list-style: none;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 3vw;
+    margin-right: 50px;
+    padding: 0;
+    max-width: 50vw;
+    color: #22b378;
+    font-size: x-large;
+    list-style-type: none;
+    
+}
+.li{
+    color: #22b378;
+    text-decoration: none;
+    /* background-color: aliceblue; */
+    
+}
+/* General Dropdown Menu Styles for Product and Process */
+.navlink .product, .navlink .process {
+    position: relative; /* Needed for positioning the dropdown menu */
+}
+
+/* Initially hide the dropdown content */
+.dropdown-content {
+    display: none; /* Hide the dropdown content by default */
+    position: absolute;
+    text-align: left;
+    top: 100%; /* Position it just below the list item */
+    left: 0;
+    background-color: #ffffff;
+    width: max-content; /* Adjust width to content */
+    padding: 10px;
+    z-index: 1;
+    border-radius: 8px;
+    width: "100px";
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Show the dropdown when hovering over the parent li */
+.navlink .product:hover .dropdown-content,
+.navlink .process:hover .dropdown-content {
+    display: block; /* Show dropdown when hovering over the item */
+}
+
+/* Style the dropdown list items */
+.dropdown-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-content ul li {
+    padding: 10px;
+    color: #22b378;
+    font-size: medium;
+    cursor: pointer;
+}
+
+/* Hover effect for dropdown items */
+.dropdown-content ul li:hover {
+    background-color: #f1f1f1; /* Change background color on hover */
+}
+
+/* Responsive Styles for Screen Width <= 1070px (mobile/tablet) */
+@media (max-width: 950px) {
+    /* Hide the dropdown by default */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; /* Full width */
+        background-color: #231f1f;
+        padding: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        transform: translateX(100%); /* Initially hidden offscreen */
+        transition: transform 0.3s ease-in-out;
+        border-radius: 10px 0 0 10px;
+    }
+
+    /* Display the drawer (show dropdown) when the menu is clicked */
+    .navlink .product.active .dropdown-content,
+    .navlink .process.active .dropdown-content {
+        display: block;
+        transform: translateX(0); /* Slide in the dropdown */
+    }
+
+    /* Style the dropdown items in mobile view */
+    .dropdown-content ul li {
+        color: #22b378;
+        font-size: larger;
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .dropdown-content ul li:hover {
+        background-color: #f1f1f1;
+    }
+}
+
+/* Mobile View for Extra Small Screens (<=680px) */
+@media (max-width: 950px) {
+    /* Adjust dropdown drawer position and style for small screens */
+    .dropdown-content {
+        padding: 10px;
+        border-radius: 8px;
+    }
+}
+
+
+/* Hidden Elements (for desktop view) */
+.icon,
+.quote,
+.call,
+.email,
+.expand,
+.clear {
+    display: none;
+}
+
+.buttons {
+    font-size: xx-large;
+    color: black;
+}
+
+/* Responsive Styles for Screen Width <= 880px */
+@media (max-width: 950px) {
+    .call_email_icon {
+        display: flex;
+        gap: 5vw;
+        color: aliceblue;
+    }
+
+    .icon {
+        display: flex;
+    }
+    
+    .call,
+    .email,
+    .expand {
+        display: flex;
+        color: #22b378;
+    }
+
+    .navlink {
+        display: none;
+    }
+
+    .clear {
+        display: block;
+        margin-left: 90%;
+    }
+
+    /* Dropdown Menu Styles */
+   /* Dropdown Menu Styles */
+   .true {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    background-color: #231f1f;
+    width: 100%;
+    padding: 10px;
+    list-style: none;
+    color: aliceblue;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.9s ease-in, transform 0.s ease; /* Adjusted duration */
+}
+
+.true.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+    .true li {
+        color: #22b378;
+        font-size: larger;
+        margin: 10px;
+        text-align: start;
+    }
+
+  
+}
+
+/* Responsive Styles for Screen Width <= 680px */
+@media (max-width: 950px) {
+    .main-nav {
+        flex-direction: column;
+        /* width: 100%; */
+    }
+
+    .logo {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .true {
+        width: 100%;
+        top: 0;
+        right: 0.5%;
+        border-top-left-radius: 10px;
+    }
+  
+
+    .true li {
+        color:#22b378 ;
+        font-size: larger;
+        margin: 10px;
+        text-align: start;
+    }
+
+    .call_email_icon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10%;
+        color: #22b378;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .quote {
+        width: 100px;
+        height: 50px;
+        font-size: large;
+        color: white;
+    }
+}

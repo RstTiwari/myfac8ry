@@ -1,0 +1,43 @@
+.maindiv{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 30px;
+    text-align: left;
+
+}
+
+.wrapcontainer{
+    font-family: Arial, sans-serif;
+    font-size: larger;
+    text-align: left;
+}
+.Image {
+    width: 45%;
+    overflow-x: hidden;
+    margin: 5vw;
+    margin-top: 1vw;
+  }
+  
+.Image img.carousel-image {
+    width: 50%; 
+    height: 500%; 
+    object-fit: cover; 
+  }
+
+
+@media (max-width:850px){
+    .maindiv{
+        flex-direction: column;
+        text-align: left;
+    }
+    .wrapcontainer{
+        text-align: justify;
+        margin-right: 5vw;
+    }
+    .Image {
+        width: 50%;
+        overflow-x: hidden;
+        margin-left: 25%;
+        border: 2px solid rebeccapurple;
+      }
+}

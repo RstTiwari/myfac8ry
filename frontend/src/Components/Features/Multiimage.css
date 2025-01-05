@@ -1,0 +1,27 @@
+.mainimage {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap to the next row */
+    justify-content: space-between; /* Spaces out cards evenly */
+    gap: 10px; /* Adds spacing between rows and columns */
+    margin: 2vw;
+}
+
+.card {
+    width: 30%; /* Each card takes 30% of the container's width */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+}
+
+
+@media (max-width:900px) {
+    .mainimage{
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .card {
+        width: 75%; 
+        box-sizing: border-box; 
+        margin: 5vw;
+    }
+    
+}

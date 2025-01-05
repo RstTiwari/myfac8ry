@@ -1,0 +1,57 @@
+/* Default Styling */
+.count {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2% auto;
+  flex-wrap: wrap; /* Allow wrapping for responsive behavior */
+}
+
+.count > div {
+  text-align: center;
+  flex: 1; /* Allow all items to take equal space */
+  min-width: 200px; /* Ensure each box has a minimum width */
+  padding: 10px;
+}
+.ptext {
+    font-size: larger;
+    color: #ffffff;
+}
+.textmaindiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  font-size:larger;
+  background-color: #22b378;
+}
+
+.buttons1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px; /* Spacing between buttons */
+  flex-wrap: wrap; /* Allow buttons to stack on smaller screens */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .count {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align each item */
+    gap: 20px; /* Add spacing between items */
+  }
+
+  .buttons1 {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Spacing between buttons */
+  }
+  .textmaindiv {
+       height: auto; /* Allow dynamic height on smaller screens */
+    padding: 20px; /* Ensure padding is preserved */
+  text-align: center;
+   align-items: center;
+  }
+}

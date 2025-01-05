@@ -1,0 +1,88 @@
+.logos{
+    margin-top: 6vw;
+    height: 100px;
+    width: 100%;
+}
+img{
+    margin-top: 1rem;
+    margin-left: 3vw;
+}
+.About-us{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    color: black;
+    margin-top: 2%;
+}
+.About-us-text{
+    text-align: center;
+}
+
+.About-Text{
+    width: 30vw;
+    font-family: Arial, sans-serif;
+    font-size: larger;
+    text-align: justify;
+    margin-left: 2vw;
+}
+.Services{
+    text-align: center;
+    font-family: Arial, sans-serif;
+    width: 30vw;
+}
+.contact-us{
+    text-align: justify;
+    font-family: Arial, sans-serif;
+    width: 30vw;
+}
+.iconss{
+    display: flex;
+    gap: 2vw;
+    color: brown;   
+}
+
+.Copyright-footer{
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, sans-serif;
+    margin: 2vw;
+
+}
+
+@media (max-width:950px) {
+    .About-us {
+        flex-direction: column;
+        width: 100%;
+        align-items: center; /* Centrally align items */
+        margin-top: 2%;
+    }
+    .About-Text {
+        width: 90%;
+        margin: 0 auto; /* Center align the text */
+        text-align: center; /* Center the text content */
+    }
+    .Services-text {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        width: 90%;
+        margin: 0 auto; /* Center align the text */
+    }
+    .contact-us {
+        font-family: Arial, sans-serif;
+        width: 90%;
+        margin: 0 auto; /* Center align the text */
+        text-align: center; /* Center the text content */
+    }
+    .iconss {
+        display: flex;
+        gap: 4vw;
+        justify-content: center; /* Center align the icons */
+    }
+    .Copyright-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 2vw;
+        margin: 2vw;
+        text-align: center; /* Center the text content */
+    }
+}
