@@ -7,7 +7,7 @@ import { WhatsApp } from "@mui/icons-material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-
+import logo from "../../assets/MyFac8ry Logo-01 (1).png"
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   let navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Header() {
       <nav className="main-nav">
         {/* Logo Section */}
         <div className="logo" onClick={() => navigate("/")}>
-          MyFac8ry <br />
+          <img src={logo} style={{ width: "200px", height: 50 }} />
         </div>
         <div className="call_email_icon">
           <div
@@ -85,7 +85,7 @@ export default function Header() {
               className="Header_buttons"
               style={{ padding: "20px", color: "black" }}
               onClick={() =>
-                (window.location.href = "https://ftms.myfac8ry.com/")
+                navigate("/quote")
               }
             >
               Get Instant Quote
