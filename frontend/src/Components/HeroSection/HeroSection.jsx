@@ -12,7 +12,7 @@ export default function Hero() {
       {/* Text Section */}
       <div className="On-demand">
         <h3 className="H1">
-          India's Leading <br />
+          India's Leading <br /> On Demand B2B <br />
           <span style={{ color: "#22b378" }}>Precision Part Hub</span>
         </h3>
         <p>
