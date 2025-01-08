@@ -7,7 +7,7 @@ import { WhatsApp } from "@mui/icons-material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-import logo from "../../assets/MyFac8ry Logo-01 (1).png"
+import logo from "../../assets/myfac8ry_logo.png"
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   let navigate = useNavigate();
@@ -21,28 +21,29 @@ export default function Header() {
       <nav className="main-nav">
         {/* Logo Section */}
         <div className="logo" onClick={() => navigate("/")}>
-          <img src={logo} style={{ width: "200px", height: 50 }} />
+          <img src={logo} style={{ width: "250px" }} />
+          <div className="call_email_icon">
+            <div
+              className="call"
+              onClick={() => (window.location.href = "tel:+8767948130")} // Replace with your desired phone number
+            >
+              <PhoneEnabledIcon />
+            </div>
+            <div
+              className="email"
+              onClick={
+                () => window.open("https://wa.me/918767948130", "_blank") // WhatsApp Web link
+              }
+            >
+              <WhatsApp />
+            </div>
+            {/* Toggle Button */}
+            <div className="icon" onClick={toggleMenu}>
+              {/* <DehazeIcon /> */}
+            </div>
+          </div>
         </div>
-        <div className="call_email_icon">
-          <div
-            className="call"
-            onClick={() => (window.location.href = "tel:+8767948130")} // Replace with your desired phone number
-          >
-            <PhoneEnabledIcon />
-          </div>
-          <div
-            className="email"
-            onClick={
-              () => window.open("https://wa.me/918767948130", "_blank") // WhatsApp Web link
-            }
-          >
-            <WhatsApp />
-          </div>
-          {/* Toggle Button */}
-          <div className="icon" onClick={toggleMenu}>
-            <DehazeIcon />
-          </div>
-        </div>
+
 
         {/* Nav Links */}
         <ul className={menuOpen ? "true show" : "navlink"}>

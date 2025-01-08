@@ -19,7 +19,10 @@ export const useModal = () => {
 
 const ModalProvider = ({ children, hideModal, showModal }: ModalContextType) => {
     return (
-        <Modal open={showModal} onCancel={() => hideModal()} footer={null} style={{ padding: 10 }}>
+        <Modal open={showModal} onCancel={hideModal} footer={null} style={{
+            top: 200
+
+        }}>
             {children}
         </Modal>
     );

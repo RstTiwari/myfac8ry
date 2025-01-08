@@ -26,6 +26,8 @@ const Coutomerarea = () => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (selectFile && material) {
+            setShowModal(!showModal)
+
         } else {
             return AlertDialogue("warning", "Please Select File and Material")
         }
@@ -71,13 +73,13 @@ const Coutomerarea = () => {
         titleText: {
             margin: "0",
             color: "#8c94a0",
-            fontSize: "13px",
-            lineHeight: "18px",
+            fontSize: "12px",
+            lineHeight: "15px",
             fontWeight: 600,
         },
         input: {
             paddingLeft: "70px",
-            marginTop: "10px",
+            marginTop: "20px",
             display: "flex",
             textAlign: "center" as "center",
             alignItems: "center",

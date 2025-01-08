@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 import "./HeroSection.css";
 import { Button } from "antd";
 // import SendIcon from '@mui/icons-material/Send';
+import heroBanner from "../../assets/Post_02.jpg";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <div className="main-demand">
       {/* Text Section */}
@@ -30,7 +34,7 @@ export default function Hero() {
             color: "white",
             padding: "20px",
           }}
-          onClick={() => (window.location.href = "https://ftms.myfac8ry.com/")}
+          onClick={() => navigate("/quote")}
         >
           Get instant quote
         </Button>
@@ -38,13 +42,12 @@ export default function Hero() {
 
       {/* Video Section */}
       <div className="videos">
-        <iframe
-          src="https://player.vimeo.com/video/867898342?autoplay=1&loop=1&autopause=0&color=00adef&portrait=0&byline=0&title=0&controls=0&muted=1"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-          style={{ width: "100%", height: "100%" }}
-        ></iframe>
+        <img
+          src={heroBanner}
+          alt=""
+          className="banner"
+          style={{ width: "100%", textAlign: "end", borderRadius: "50px" }}
+        />
       </div>
     </div>
   );

@@ -20,8 +20,8 @@ const SignInForm: React.FC<SignInFormProps> = ({ hideModal }) => {
     const handleSubmit = () => {
         form.validateFields()
             .then((values) => {
-                console.log("Form Values:", values);
-                hideModal(); // Close modal on successful submission
+
+                hideModal();
             })
             .catch(() => {
                 // Handle submission error
@@ -59,11 +59,11 @@ const SignInForm: React.FC<SignInFormProps> = ({ hideModal }) => {
             <Form.Item>
                 {!otpSent ? (
                     <Button type="text" style={{ backgroundColor: "#22b378", width: "100%" }} onClick={handleSendOtp}>
-                        Send OTP
+                        GET OTP
                     </Button>
                 ) : (
                     <Button type="primary" htmlType="submit" style={{ backgroundColor: "#22b378", width: "100%" }}  >
-                        Sign In
+                        CONTINUE
                     </Button>
                 )}
             </Form.Item>

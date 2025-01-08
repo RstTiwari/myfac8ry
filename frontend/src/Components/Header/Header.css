@@ -163,10 +163,25 @@
 
 /* Responsive Styles for Screen Width <= 880px */
 @media (max-width: 950px) {
+
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.call_email_icon {
+    display: flex;
+    gap: 15px; /* Space between call, email, and icon */
+    align-items: center;
+    color: aliceblue;
+    margin-left: auto; /* Push the icons to the far right */
+}
     .call_email_icon {
         display: flex;
-        gap: 5vw;
         color: aliceblue;
+        align-items: end;
+        margin-left: auto;
     }
 
     .icon {
@@ -227,14 +242,14 @@
 @media (max-width: 950px) {
     .main-nav {
         flex-direction: column;
+        height: auto;
         /* width: 100%; */
     }
 
     .logo {
         width: 100%;
         display: flex;
-        justify-content: center;
-        text-align: center;
+        justify-content: flex-start;
     }
 
     .true {
