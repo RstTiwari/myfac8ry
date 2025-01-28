@@ -9,7 +9,7 @@ export default class AuthService {
             ? import.meta.env.VITE_URL_LOCAL
             : import.meta.env.VITE_URL_PROD;
 
-    static token:string|undefined = LocalStorageHelper.get("token")
+    static token:string|undefined = LocalStorageHelper.get("token")?.value
 
     async registerUser(data: object) {
         let response: registerUserInterface = await this.apiCall(
