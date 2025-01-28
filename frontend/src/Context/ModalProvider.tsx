@@ -4,7 +4,7 @@ import { Modal } from "antd";
 type ModalContextType = {
     showModal: boolean;
     hideModal: () => void;
-    children: ReactNode
+    children: ReactNode;
 };
 
 const ModalContext = createContext<ModalContextType | null>(null);
@@ -17,15 +17,24 @@ export const useModal = () => {
     return context;
 };
 
-const ModalProvider = ({ children, hideModal, showModal }: ModalContextType) => {
+const ModalProvider = ({
+    children,
+    hideModal,
+    showModal,
+}: ModalContextType) => {
     return (
-        <Modal open={showModal} onCancel={hideModal} footer={null} style={{
-            top: 200
-
-        }}>
+        <Modal
+            open={showModal}
+            onCancel={hideModal}
+            footer={null}
+            style={{
+                top: 100,
+                zIndex: 10000000,
+            }}
+        >
             {children}
         </Modal>
     );
 };
 
-export default ModalProvider
+export default ModalProvider;

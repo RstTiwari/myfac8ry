@@ -46,7 +46,7 @@ export default function Hero() {
           src={heroBanner}
           alt=""
           className="banner"
-          style={{ width: "100%", textAlign: "end", borderRadius: "50px" }}
+          style={{ width: "100%", height:"75vh", textAlign: "end", borderRadius: "10px" }}
         />
       </div>
     </div>

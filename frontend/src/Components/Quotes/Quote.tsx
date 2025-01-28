@@ -1,35 +1,85 @@
 import React, { useState } from "react";
-import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { AutoComplete, Modal, Select } from "antd";
-import { BiLock } from "react-icons/bi";
+import * as ai from "react-icons/ai";
+import {
+    AutoComplete,
+    Modal,
+    Select,
+    Row,
+    Typography,
+    Upload,
+    Button,
+} from "antd";
+import { BiLock, BiUpload } from "react-icons/bi";
 import customerArea1 from "../../Assets/coustmerarea1.png";
 import customerArea2 from "../../Assets/coustmerarea2.png";
 import customerArea3 from "../../Assets/coustmerarea3.png";
-import AlertDialogue from "../../Comman/AlertDialogue"
+import AlertDialogue from "../../Comman/AlertDialogue";
 import SignInForm from "../../Form/SigninForm";
+import AuthService from "../../Class/AuthClass";
 import ModalProvider from "../../Context/ModalProvider";
-const Coutomerarea = () => {
-    const [selectFile, setSelectFile] = useState<File | null>(null);
-    const [material, setMaterial] = useState<any>("")
-    const [showModal, setShowModal] = useState(false)
-    const hideModal = () => {
-        setShowModal(!showModal)
-    }
+import { LocalStorageHelper } from "../../Class/LocalstorageHelper";
+import { UploadFile } from "antd/es/upload/interface";
+import { DeleteOutline } from "@mui/icons-material";
+import { NavigationHelper } from "../../Class/Navigator";
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setSelectFile(e.target.files[0]);
-        } else {
-            setSelectFile(null);
-        }
+const { Text } = Typography;
+const Coutomerarea = () => {
+    const [selectFile, setSelectFile] = useState<UploadFile[]>([]);
+    const [material, setMaterial] = useState<any>({ label: "", value: "" });
+    const [process, setProcess] = useState<any>({ label: "", value: "" });
+    const [showModal, setShowModal] = useState(false);
+    const hideModal = () => {
+        setShowModal(!showModal);
     };
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (selectFile && material) {
-            setShowModal(!showModal)
+    const handleFileChange = (info: any) => {
+        setSelectFile(info.fileList); // Directly use fileList to store files
+    };
 
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (selectFile && material) {
+            let token = LocalStorageHelper.getToken("token");
+            if (token) {
+                let data = new FormData();
+
+                selectFile.forEach((file: any) => {
+                    data.append("attachments[]", file.originFileObj);
+                });
+
+                data.append("to", LocalStorageHelper.get("email"));
+                data.append("from", "iamrrt2121@gmail.com");
+                data.append("customer", LocalStorageHelper.get("tenantId"));
+
+                // Ensure material and process values are properly defined
+                if (material && material.value) {
+                    data.append("material", material.value);
+                } else {
+                    console.error("material value is missing.");
+                }
+
+                if (process && process.value) {
+                    data.append("process", process.value);
+                } else {
+                    console.error("process value is missing.");
+                }
+                data.append("sub", `Enquiry for ${process.label}`);
+                data.append(
+                    "content",
+                    `Dear ${LocalStorageHelper.get(
+                        "name"
+                    )}thanks allot for using Myfac8ry.com . We have received Your Enquiry you will get Quote ASAP`
+                );
+                let response = await new AuthService().createEnquiry(data);
+                if (response.success) {
+                    NavigationHelper.navigateTo("/home");
+                } else {
+                    return AlertDialogue("error", response.message);
+                }
+            } else {
+                setShowModal(!showModal);
+            }
         } else {
-            return AlertDialogue("warning", "Please Select File and Material")
+            return AlertDialogue("warning", "Please Select File and Material");
         }
     };
 
@@ -46,12 +96,11 @@ const Coutomerarea = () => {
             flexDirection: "column" as "column",
             alignItems: "center",
             justifyContent: "flex-start",
-            padding: "40px 16px 16px",
             border: "1px dashed #22b378",
             backgroundColor: "#f5faff",
         },
         coustmerareaImages: {
-            marginBottom: "32px",
+            marginBottom: "10px",
         },
         image: {
             width: "auto",
@@ -110,56 +159,171 @@ const Coutomerarea = () => {
             <div style={styles.coustmerarea}>
                 <div style={styles.coustmerareaContainer}>
                     <div style={styles.coustmerareaImages}>
-                        <img alt="coustmerarea1" src={customerArea1} style={styles.image} />
-                        <img alt="coustmerarea2" src={customerArea2} style={styles.image} />
-                        <img alt="coustmerarea3" src={customerArea3} style={styles.image} />
+                        <img
+                            alt="coustmerarea1"
+                            src={customerArea1}
+                            style={styles.image}
+                        />
+                        <img
+                            alt="coustmerarea2"
+                            src={customerArea2}
+                            style={styles.image}
+                        />
+                        <img
+                            alt="coustmerarea3"
+                            src={customerArea3}
+                            style={styles.image}
+                        />
                     </div>
                     <div style={styles.title}>
                         <h2 style={styles.titleHeading}>Upload your models</h2>
                         <div>
                             <p style={styles.titleText}>
-                                Uploading CADs is the best way to get an instant quote
+                                Uploading CADs is the best way to get an instant
+                                quote
                                 <span>
-                                    <AiOutlineExclamationCircle />
+                                    <ai.AiOutlineExclamationCircle />
                                 </span>
                             </p>
                         </div>
+                        <Row justify={"center"} style={{ padding: "2px" }}>
+                            <Text type="success">
+                                SELECT CAD FILE(*multiple)
+                            </Text>
+                        </Row>
+                        <Row justify={"center"} style={{ marginBottom: 4 }}>
+                            <Upload
+                                beforeUpload={() => false}
+                                fileList={selectFile}
+                                onChange={handleFileChange}
+                                multiple
+                                showUploadList={{
+                                    showRemoveIcon: true,
+                                    removeIcon: (file) => (
+                                        <span
+                                            style={{
+                                                cursor: "pointer",
+                                                color: "#ff4d4f",
+                                                marginLeft: "8px",
+                                                padding: 20, // Space between file name and remove icon
+                                            }}
+                                            onClick={() =>
+                                                handleFileChange({
+                                                    fileList: selectFile.filter(
+                                                        (f) =>
+                                                            f.uid !== file.uid
+                                                    ),
+                                                })
+                                            }
+                                        >
+                                            <DeleteOutline />
+                                        </span>
+                                    ),
+                                }}
+                            >
+                                <Button icon={<BiUpload />}>
+                                    Attach Files
+                                </Button>
+                            </Upload>
+                        </Row>
 
-                        <input
-                            onChange={handleFileChange}
-                            type="file"
-                        />
-                        <AutoComplete placeholder={"Type Or Choose Material"}
+                        <Row justify={"center"} style={{ padding: "2px" }}>
+                            <Text type="success">SELECT OR TYPE MATERIAL</Text>
+                        </Row>
+                        <AutoComplete
+                            placeholder={"Type Or Choose Material"}
                             style={{ width: 300, marginTop: 10 }}
-                            value={material}
-                            onChange={(char) => setMaterial(char)}
-                            onSelect={(value, label) => setMaterial(label.label)}
-                            options={[
-                                { "label": "Aluminum 6061", "value": "aluminum_6061" },
-                                { "label": "Copper 101", "value": "copper_101" },
-                                { "label": "Copper 260", "value": "copper_260" },
-                                { "label": "Copper 360", "value": "copper_360" },
-                                { "label": "Copper C110", "value": "copper_c110" },
-                                { "label": "O1 Tool Steel", "value": "o1_tool_steel" },
-                                { "label": "Stainless Steel 15-5", "value": "stainless_steel_15_5" },
-                                { "label": "Stainless Steel 17-4", "value": "stainless_steel_17_4" },
-                                { "label": "Stainless Steel 18-8", "value": "stainless_steel_18_8" },
-                                { "label": "Stainless Steel 303", "value": "stainless_steel_303" },
-                                { "label": "Stainless Steel 316/316L", "value": "stainless_steel_316_316l" },
-                                { "label": "Stainless Steel 410", "value": "stainless_steel_410" },
-                                { "label": "Stainless Steel 416", "value": "stainless_steel_416" },
-                                { "label": "Stainless Steel 420", "value": "stainless_steel_420" },
-                                { "label": "Stainless Steel 440C", "value": "stainless_steel_440c" },
-                                { "label": "Steel 1018", "value": "steel_1018" },
-                                { "label": "Steel 1215", "value": "steel_1215" },
-                                { "label": "Steel 4130", "value": "steel_4130" },
-                                { "label": "Steel 4140", "value": "steel_4140" },
-                                { "label": "Steel 4140PH", "value": "steel_4140ph" },
-                                { "label": "Steel 4340", "value": "steel_4340" },
-                                { "label": "Zinc Alloy", "value": "zinc_alloy" }
-                            ]
+                            value={material.label}
+                            onChange={(char) =>
+                                setMaterial({ labele: char, value: char })
                             }
-
+                            onSelect={(value, label) =>
+                                setMaterial({
+                                    label: label.label,
+                                    value: value,
+                                })
+                            }
+                            options={[
+                                {
+                                    label: "Aluminum 6061",
+                                    value: "aluminum_6061",
+                                },
+                                { label: "Copper 101", value: "copper_101" },
+                                { label: "Copper 260", value: "copper_260" },
+                                { label: "Copper 360", value: "copper_360" },
+                                { label: "Copper C110", value: "copper_c110" },
+                                {
+                                    label: "O1 Tool Steel",
+                                    value: "o1_tool_steel",
+                                },
+                                {
+                                    label: "Stainless Steel 15-5",
+                                    value: "stainless_steel_15_5",
+                                },
+                                {
+                                    label: "Stainless Steel 17-4",
+                                    value: "stainless_steel_17_4",
+                                },
+                                {
+                                    label: "Stainless Steel 18-8",
+                                    value: "stainless_steel_18_8",
+                                },
+                                {
+                                    label: "Stainless Steel 303",
+                                    value: "stainless_steel_303",
+                                },
+                                {
+                                    label: "Stainless Steel 316/316L",
+                                    value: "stainless_steel_316_316l",
+                                },
+                                {
+                                    label: "Stainless Steel 410",
+                                    value: "stainless_steel_410",
+                                },
+                                {
+                                    label: "Stainless Steel 416",
+                                    value: "stainless_steel_416",
+                                },
+                                {
+                                    label: "Stainless Steel 420",
+                                    value: "stainless_steel_420",
+                                },
+                                {
+                                    label: "Stainless Steel 440C",
+                                    value: "stainless_steel_440c",
+                                },
+                                { label: "Steel 1018", value: "steel_1018" },
+                                { label: "Steel 1215", value: "steel_1215" },
+                                { label: "Steel 4130", value: "steel_4130" },
+                                { label: "Steel 4140", value: "steel_4140" },
+                                {
+                                    label: "Steel 4140PH",
+                                    value: "steel_4140ph",
+                                },
+                                { label: "Steel 4340", value: "steel_4340" },
+                                { label: "Zinc Alloy", value: "zinc_alloy" },
+                            ]}
+                        />
+                        <Row justify={"center"} style={{ padding: "2px" }}>
+                            <Text title="large" type="success">
+                                SELECT PROCESS
+                            </Text>
+                        </Row>
+                        <Select
+                            placeholder={" Choose Process"}
+                            style={{ width: 300, marginTop: 10 }}
+                            value={process.label}
+                            onSelect={(value, label) =>
+                                setProcess({ label: label.label, value: value })
+                            }
+                            options={[
+                                { label: "CNC MILLING", value: "cnc_milling" },
+                                { label: "CNC TURNING", value: "cnc_turning" },
+                                {
+                                    label: "CNC GRINDING",
+                                    value: "cnc_grinding",
+                                },
+                            ]}
                         />
                         <button style={styles.button} onClick={handleSubmit}>
                             GET QUOTATION!
@@ -167,7 +331,8 @@ const Coutomerarea = () => {
 
                         <div>
                             <p style={styles.secureText}>
-                                <BiLock className="fa__lock" /> All uploads are secure and confidential
+                                <BiLock className="fa__lock" /> All uploads are
+                                secure and confidential
                             </p>
                         </div>
                     </div>
@@ -177,7 +342,6 @@ const Coutomerarea = () => {
                 <SignInForm hideModal={hideModal} />
             </ModalProvider>
         </>
-
     );
 };
 

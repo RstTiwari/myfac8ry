@@ -10,7 +10,7 @@ import { Modal } from "antd";
 const AlertDialogue = (
     type: "info" | "success" | "error" | "warning",
     title: string,
-    content: string,
+    content?: string,
     onOk?: () => void
 ) => {
     Modal[type]({
