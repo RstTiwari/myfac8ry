@@ -19,7 +19,6 @@ import Index from "./Pages/Dashboard/Index";
 import { Fragment } from "react/jsx-runtime";
 function App() {
     let token = LocalStorageHelper.getToken("token");
-    console.log(token,"===")
     return (
         <Router>
             {!token ? (

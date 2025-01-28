@@ -3,7 +3,6 @@ import { Form, Input, Checkbox, Button, Row, Col, Typography } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import RegisterForm from "../Form/SignupForm"; // Import Register form
 import { Link } from "react-router-dom";
-import { Cookie } from "@mui/icons-material";
 import AuthService from "../Class/AuthClass";
 import { LocalStorageHelper } from "../Class/LocalstorageHelper";
 import { NavigationHelper } from "../Class/Navigator";
