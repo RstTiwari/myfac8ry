@@ -10,9 +10,9 @@ import {
     Button,
 } from "antd";
 import { BiLock, BiUpload } from "react-icons/bi";
-import customerArea1 from "../../Assets/coustmerarea1.png";
-import customerArea2 from "../../Assets/coustmerarea2.png";
-import customerArea3 from "../../Assets/coustmerarea3.png";
+import customerArea1 from "../../assets/coustmerarea1.png";
+import customerArea2 from "../../assets/coustmerarea2.png";
+import customerArea3 from "../../assets/coustmerarea3.png";
 import AlertDialogue from "../../Comman/AlertDialogue";
 import SignInForm from "../../Form/SigninForm";
 import AuthService from "../../Class/AuthClass";
