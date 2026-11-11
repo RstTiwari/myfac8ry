@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Veloce Factory</title>
+  <rect width="64" height="64" rx="13" fill="#071b31" />
+  <text x="2" y="52" fill="#f6f7f5" font-family="Barlow Condensed, Impact, sans-serif" font-size="57" font-weight="800" letter-spacing="-6">V</text>
+  <text x="30" y="48" fill="#f15a18" font-family="Barlow Condensed, Impact, sans-serif" font-size="47" font-weight="800" letter-spacing="-5">F</text>
+</svg>
